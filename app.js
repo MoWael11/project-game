@@ -59,7 +59,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://naval-battles.onrender.com//auth/google/game",
+    callbackURL: "https://naval-battles.onrender.com/auth/google/game",
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate(
