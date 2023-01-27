@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+    <div class="landing-page">
+        <video class="landing-video" autoplay="" muted loop="">
+            <source src="media/landingVideo.mp4" type="video/mp4">
+            your browser does not supper the video tag.
+        </video>
+        <div class="container home">
+            <h1 class="main-title">naval battles</h1>
+            <div class="card">
+                <img class="logo" src="media/images/logo.jpg" alt="logo">
+                <a class="google-auth" href="/auth/google"><img src="media/images/google-icon.png" alt=""></a>
+                <form action="/login" method="POST">
+                    <p>sign in</p>
+                    <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="off">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    <p class="status"> <%= invalidCredentails %> </p>
+                    <button type="submit" class="btn btn-dark">log in now</button>
+                </form>
+                <p class="sign-up">
+                    Don't have an account?   
+                    <a class="btn" href="/register">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+<%- include('partials/footer') %>
