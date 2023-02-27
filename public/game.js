@@ -264,7 +264,7 @@ async function botTurn() {
     }
   } else if (casual) {
     do {
-      if (Math.floor(Math.random() * 10) === 5) {
+      if (Math.floor(Math.random() * 20) === 5) {
         do {
           xForBot = Math.floor(Math.random() * 14);
           yForBot = Math.floor(Math.random() * 14);
