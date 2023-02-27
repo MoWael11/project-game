@@ -38,7 +38,7 @@ getUsers();
 export async function setScore() {
   try {
     const response = await fetch(
-      `https://naval-battles.onrender.com/game/users /game/users/${usernameForMain.textContent}`,
+      `https://naval-battles.onrender.com/game/users/${usernameForMain.textContent}`,
       {
         method: "POST",
         headers: {
