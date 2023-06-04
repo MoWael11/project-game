@@ -129,7 +129,7 @@ var yForBot;
 let originalXBot;
 let originalYBot;
 
-function botTurn() {
+async function botTurn() {
   if (goLeft) {
     map.grid[yForBot][xForBot].id === 6 ? (bigShip = true) : "";
     if (xForBot > 0 && map.grid[yForBot][xForBot - 1].shoted === false && bigShip === false) {
@@ -292,7 +292,7 @@ function botTurn() {
     winner.text = "The bot is the winner, good luck in the next time";
     gameStarted = false;
     exitingMassege = true;
-    sleep(2000)
+    await sleep(2000)
     gameEnded = true;
   }
   waitBot = false;
