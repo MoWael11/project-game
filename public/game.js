@@ -292,7 +292,7 @@ function botTurn() {
     winner.text = "The bot is the winner, good luck in the next time";
     gameStarted = false;
     exitingMassege = true;
-    await sleep(2000)
+    sleep(2000)
     gameEnded = true;
   }
   waitBot = false;
