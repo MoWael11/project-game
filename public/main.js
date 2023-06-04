@@ -5,7 +5,7 @@ const loader = document.querySelector(".lds-ripple");
 
 async function getUsers() {
   try {
-    const response = await fetch("https://naval-battles.mowael.com/game/users");
+    const response = await fetch("https://naval-battles.onrender.com/game/users");
     loader.style.display = "none";
     const usersArray = await response.json();
     for (let i = 0; i < usersArray.length; i++) {
@@ -38,7 +38,7 @@ getUsers();
 export async function setScore() {
   try {
     const response = await fetch(
-      `https://naval-battles.mowael.com/game/users/${usernameForMain.textContent}`,
+      `https://naval-battles.onrender.com/game/users/${usernameForMain.textContent}`,
       {
         method: "POST",
         headers: {
