@@ -129,15 +129,10 @@ var yForBot;
 let originalXBot;
 let originalYBot;
 
-async function botTurn() {
-  await sleep(500);
+function botTurn() {
   if (goLeft) {
     map.grid[yForBot][xForBot].id === 6 ? (bigShip = true) : "";
-    if (
-      xForBot > 0 &&
-      map.grid[yForBot][xForBot - 1].shoted === false &&
-      bigShip === false
-    ) {
+    if (xForBot > 0 && map.grid[yForBot][xForBot - 1].shoted === false && bigShip === false) {
       xForBot -= 1;
       if (map.grid[yForBot][xForBot].occupied === false) {
         goLeft = false;
@@ -148,21 +143,19 @@ async function botTurn() {
       xForBot = originalXBot;
       if (xForBot < 13 && map.grid[yForBot][xForBot + 1].shoted === false) {
         xForBot += 1;
-        if (xForBot - 1 === 0 && map.grid[yForBot][xForBot].id === null) {
+        if (map.grid[yForBot][xForBot].occupied === false) {
           goDown = true;
         } else {
           goRight = true;
         }
-      } else if (
-        map.grid[yForBot + 1][originalXBot].shoted === false &&
-        originalYBot < 13
-      ) {
+      } else if (originalYBot < 13 && map.grid[yForBot + 1][originalXBot].shoted === false ) {
         yForBot = originalYBot + 1;
-        goDown = true;
-      } else if (
-        map.grid[yForBot - 1][originalXBot].shoted === false &&
-        originalYBot > 13
-      ) {
+        if (map.grid[yForBot][xForBot].occupied === false) {
+          goUp = true;
+        } else {
+          goDown = true;
+        }
+      } else {
         yForBot = originalYBot - 1;
         goUp = true;
       }
@@ -218,26 +211,19 @@ async function botTurn() {
       }
     } else {
       goRight = false;
-      xForBot = originalXBot;
-      if (
-        originalYBot < 13 &&
-        map.grid[yForBot + 1][xForBot].shoted === false
-      ) {
+      if (originalYBot < 13 && map.grid[yForBot + 1][xForBot].shoted === false) {
         yForBot = originalYBot + 1;
-        if (map.grid[yForBot][xForBot].id === null) {
+        if (map.grid[yForBot][xForBot].occupied === false) {
           goUp = true;
         } else {
           goDown = true;
         }
-      } else if (
-        map.grid[yForBot - 1][originalXBot].shoted === false &&
-        originalYBot > 0
-      ) {
+      } else {
         yForBot = originalYBot - 1;
         goUp = true;
       }
     }
-  } else if (goDown) {
+  } else if (goDown) {    
     xForBot = originalXBot;
     if (yForBot < 13 && map.grid[yForBot + 1][xForBot].shoted === false) {
       yForBot += 1;
@@ -248,14 +234,16 @@ async function botTurn() {
     } else {
       goDown = false;
       yForBot = originalYBot;
-      if (map.grid[yForBot - 1][xForBot].shoted === false && yForBot > 0) {
+      if (yForBot > 0 && map.grid[yForBot - 1][xForBot].shoted === false) {
         yForBot = originalYBot - 1;
         goUp = true;
+      } else {
+        casual = true;
       }
     }
   } else if (goUp) {
     yForBot > originalYBot ? (yForBot = originalYBot) : "";
-    if (yForBot > 0 && map.grid[yForBot - 1][xForBot].shoted === false) {
+    if (yForBot > 0 && map.grid[yForBot - 1][xForBot].shoted === false && xForBot >= 0) {
       yForBot -= 1;
       if (map.grid[yForBot][xForBot].occupied === false) {
         goUp = false;
@@ -264,7 +252,7 @@ async function botTurn() {
     }
   } else if (casual) {
     do {
-      if (Math.floor(Math.random() * 20) === 5) {
+      if (Math.floor(Math.random() * 12) === 6) {
         do {
           xForBot = Math.floor(Math.random() * 14);
           yForBot = Math.floor(Math.random() * 14);
@@ -292,19 +280,19 @@ async function botTurn() {
     map.grid[yForBot][xForBot].id !== null &&
     map.checkIfShipDestroyed(map.grid[yForBot][xForBot].id, ships)
   ) {
-    map.grid[yForBot][xForBot].id === 6 ? (bigShip = false) : "";
+    map.grid[yForBot][xForBot].id === 6 ? (bigShip = false) : ""
     goLeft = false;
     goRight = false;
     goDown = false;
     goUp = false;
     casual = true;
   }
-  await sleep(500);
 
   if (map.cheksAllShipShotted()) {
     winner.text = "The bot is the winner, good luck in the next time";
     gameStarted = false;
     exitingMassege = true;
+    await sleep(2000)
     gameEnded = true;
   }
   waitBot = false;
