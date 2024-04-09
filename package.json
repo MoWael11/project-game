@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "naval battels game",
   "main": "app.js",
-  
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint **/*.js"
   },
   "author": "",
   "license": "ISC",
